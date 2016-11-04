@@ -137,7 +137,7 @@ namespace DTEDCapstone
                 //Once the file is selected, export the data
                 if (fopen.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    cData.Export(fopen.FileName + ".csv");
+                    //cData.Export(fopen.FileName + ".csv");
                 }
             }
             catch(Exception error)

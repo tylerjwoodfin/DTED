@@ -1,0 +1,12 @@
+﻿<Window x:Class="DTEDCapstone.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DTED Level 1 Parser" Height="300" Width="300">
+    <Grid>
+        <ToolBar HorizontalAlignment="Left" VerticalAlignment="Top" Width="700" Height="30">
+            <Button Name="import" Content="Import" Width="50" Height="20" Click="import_Click"/>
+            <Button Name="export" Content="Export" Width="50" Height="20" Click="export_Click" IsEnabled="False"/>
+        </ToolBar>
+        <Label Name="TextLabel" Content="Please select Import or Export" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+</Window>
