@@ -1,0 +1,41 @@
+--- DTEDCapstone_2/Data_Layer/CartesianData.cs	2016-11-04 02:16:00.588170000 -0500
++++ DTEDCapstone/Data_Layer/CartesianData.cs	2016-11-04 01:54:04.557266800 -0500
+@@ -26,13 +26,37 @@
+         /*Convert the raw data using GEOTRANS native api support*/
+         public void Convert()
+         {
++            int mid1 = data.GetLength(0) / 2;
++            int mid2 = data.GetLength(1) / 2;
++            MappedData pt = data[mid1, mid2];
++            double lat = pt.Latitude.getDecimalDegree();
++            double lng = pt.Longitude.getDecimalDegree();
++            double cx = Math.Cos(lng);
++            double cy = Math.Cos(lat);
++            double sx = Math.Sin(lng);
++            double sy = Math.Sin(lat);
++            //Components of the vector pointing up at this point
++            double Zx = cx * cy;
++            double Zy = sx * cy;
++            double Zz = sy;
++            //Components of the vector pointing East at this point
++            double Xx = -sx;
++            double Xy = cx;
++            double Xz = 0;
++            //Components of the vector pointing North at this point
++            double Yx = -cx * sy;
++            double Yy = -sx * sy;
++            double Yz = cy;
+             //Translate each point in the matrix
+             cartData = new CartesianPoint[data.GetLength(0), data.GetLength(1)];
+             for (int i = 0; i < cartData.GetLength(1); i++)
+             {
+                 for (int j = data.GetLength(0) - 1; j >= 0; j--)
+                 {
+-                    cartData[j, i] = Translate.Convert(data[j, i].Latitude.Degrees, data[j, i].Longitude.Degrees, data[j, i].Elevation);
++                    CartesianPoint tmp = Translate.Convert(data[j, i].Latitude.getDecimalDegree(), data[j, i].Longitude.getDecimalDegree(), data[j, i].Elevation);
++                    cartData[j, i].X = Xx * tmp.X + Xy * tmp.Y + Xz * tmp.Z;
++                    cartData[j, i].Y = Yx * tmp.X + Yy * tmp.Y + Yz * tmp.Z;
++                    cartData[j, i].Z = Zx * tmp.X + Zy * tmp.Y + Zz * tmp.Z;
+                 }
+             }
+         }
