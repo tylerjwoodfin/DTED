@@ -123,6 +123,7 @@ namespace DTEDCapstone
             GnuPlot.SPlot(scaledData.GetLength(1), z);
 
             export.IsEnabled = true;
+            TextLabel.Content = "File Loaded";
         }
 
         /*When the export button is clicked*/
