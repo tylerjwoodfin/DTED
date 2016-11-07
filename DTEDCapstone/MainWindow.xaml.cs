@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Forms;
+using System.IO;
 
 using DTEDCapstone.Data_Layer;
 using DTEDCapstone.File_Reader;
@@ -138,16 +139,24 @@ namespace DTEDCapstone
             //Construct file dialog
             TextLabel.Content = "Exporting...";
             SaveFileDialog fopen = new SaveFileDialog();
-            String fileName = "";
+            String filePath = "";
 
             try
             {
                 //Once the file is selected, export the data
                 if (fopen.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    fileName = fopen.FileName;
-                    cData.Export(fileName + ".csv");
+                    filePath = fopen.FileName;
+                    cData.Export(filePath + ".csv");
+
+                    //Show user if successful.
+                    TextLabel.Content = "Export '" + Path.GetFileName(filePath) + "' Successful";
                 }
+                else
+                {
+                    TextLabel.Content = "Export Cancelled";
+                }
+
             }
             catch(Exception error)
             {
@@ -155,8 +164,6 @@ namespace DTEDCapstone
                 System.Windows.MessageBox.Show("An error occured in export.");
             }
 
-            //Show user if successful.
-            TextLabel.Content = "Export '" + fileName + "' Successful";
         }
     }
 }

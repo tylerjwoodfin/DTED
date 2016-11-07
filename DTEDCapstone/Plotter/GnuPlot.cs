@@ -11,8 +11,8 @@ namespace DTEDCapstone.Plotter
      https://github.com/AwokeKnowing/GnuplotCSharp*/
     class GnuPlot
     {
-        //public static string PathToGnuplot = @"C:\Program Files (x86)\gnuplot\bin";
-        public static string PathToGnuplot = Directory.GetCurrentDirectory();
+        public static string PathToGnuplot = @"C:\Program Files (x86)\gnuplot\bin";
+        //public static string PathToGnuplot = Directory.GetCurrentDirectory();
         private static Process ExtPro;
         private static StreamWriter GnupStWr;
         private static List<StoredPlot> PlotBuffer;
