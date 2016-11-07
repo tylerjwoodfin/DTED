@@ -29,8 +29,12 @@ namespace DTEDCapstone
     {
         public const double DEFAULT_SCALE_FACTOR = 0.50;
 
+
         /*Holds raw data read from the .dt1 file*/
         DTED_Data data;
+
+        /*data for exporting stuff*/
+        CartesianData cData;
 
         /*Construct the new window*/
         public MainWindow()
@@ -93,7 +97,9 @@ namespace DTEDCapstone
 
             int counter = 0; // Counter to place elevation in proper order
 
-            CartesianPoint[,] pts = new CartesianData(scaledData).getCartesianData();
+            cData = new CartesianData(scaledData);
+
+            CartesianPoint[,] pts = cData.getCartesianData();
 
             // Iterate from left to right on grid
             for(int i = 0; i < longiNum; ++i)
@@ -138,7 +144,7 @@ namespace DTEDCapstone
                 //Once the file is selected, export the data
                 if (fopen.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    //cData.Export(fopen.FileName + ".csv");
+                    cData.Export(fopen.FileName + ".csv");
                 }
             }
             catch(Exception error)
