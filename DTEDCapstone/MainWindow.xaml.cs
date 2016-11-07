@@ -129,6 +129,7 @@ namespace DTEDCapstone
             //GnuPlot.SPlot(x, y, z); // Don't think this does what I think it does. :/
             GnuPlot.SPlot(scaledData.GetLength(1), z);
 
+            // Enable exporting and update status
             export.IsEnabled = true;
             TextLabel.Content = "File Loaded";
         }
@@ -146,8 +147,16 @@ namespace DTEDCapstone
                 //Once the file is selected, export the data
                 if (fopen.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
+                    // Get file path from dialog
                     filePath = fopen.FileName;
-                    cData.Export(filePath + ".csv");
+
+                    // Acertain that filename ends with .csv
+                    if (!filePath.EndsWith(".csv"))
+                    {
+                        filePath += ".csv";
+                    }
+                    // Export data
+                    cData.Export(filePath);
 
                     //Show user if successful.
                     TextLabel.Content = "Export '" + Path.GetFileName(filePath) + "' Successful";
