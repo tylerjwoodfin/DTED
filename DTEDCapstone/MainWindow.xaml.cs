@@ -138,13 +138,15 @@ namespace DTEDCapstone
             //Construct file dialog
             TextLabel.Content = "Exporting...";
             SaveFileDialog fopen = new SaveFileDialog();
+            String fileName = "";
 
             try
             {
                 //Once the file is selected, export the data
                 if (fopen.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    cData.Export(fopen.FileName + ".csv");
+                    fileName = fopen.FileName;
+                    cData.Export(fileName + ".csv");
                 }
             }
             catch(Exception error)
@@ -152,8 +154,9 @@ namespace DTEDCapstone
                 //Show user an error has occurred if needed
                 System.Windows.MessageBox.Show("An error occured in export.");
             }
+
             //Show user if successful.
-            TextLabel.Content = "Export Successful";
+            TextLabel.Content = "Export '" + fileName + "' Successful";
         }
     }
 }
